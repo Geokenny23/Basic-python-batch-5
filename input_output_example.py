@@ -1,0 +1,7 @@
+nama = input("Masukkan Nama: ")
+umur = input("Masukkan umur:  ")
+alamat = input("Masukkan Alamat: ")
+ya = "Halo nama saya {}, saya berummur {} tahun, saya tinggal di {}".format(nama,umur,alamat)
+print("")
+print(ya)
+print("")

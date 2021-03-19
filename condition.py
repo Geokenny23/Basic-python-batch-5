@@ -7,3 +7,4 @@ elif a==b:
     print("a sama besar")
 else:
     print("a lebih kecil")
+

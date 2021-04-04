@@ -1,35 +1,60 @@
 #import smtplib supaya guna mengconnect python ke gmail
 import smtplib as smp
+import getpass
 
-#menulis/log in ke gmail anda(gmail pengirim)
-gmailaddress = input("silahkan input gmail anda? \n ")
-gmailpassword = input("passwordnya apa? \n  ")
+def menu():
+    print("----menu---")
+    print("1. Kirim E-mail")
+    print("2. Keluar")
 
-mailServer = smp.SMTP('smtp.gmail.com' , 587)          #untuk mengirim email, dibutuhkan server
-mailServer.starttls()
+def menu2() :
+    print("apakah anda ingin mengirim lagi?(y/t)")
 
-#code ini berfungsi untuk meng log in akun gmail anda 
-mailServer.login(gmailaddress , gmailpassword)
+print("Selamat datang!!!")
+while True:
+    menu()
+    pilihan = int(input("Pilih menu: "))
+    if pilihan == 1:
+        #menulis/log in ke gmail anda(gmail pengirim)
+        gmailaddress = input("silahkan input gmail anda? \n ")
+        gmailpassword = getpass.getpass(prompt= "password:  ")
+       
 
-#menulis email penerima
-mailto = input("alamat email yang ingin dikirim? \n ")
+        mailServer = smp.SMTP('smtp.gmail.com' , 587)          #untuk mengirim email, dibutuhkan server
+        mailServer.starttls()
 
-#menulis subject dan body yang akan menjadi pesan 
-sub = input("subject?\n")
-body = input("message? \n ")
-msg = f'subject: {sub}\n\n{body}'                     #menggunakan f string agar penulisannya  berformat
+        #code ini berfungsi untuk meng log in akun gmail anda 
+        mailServer.login(gmailaddress , gmailpassword)
 
-#mengirimkan email
-mailServer.sendmail(gmailaddress, mailto , msg)
-print(" \n pesan berhasil dikirim!")
+        #menulis email penerima
+        mailto = input("alamat email yang ingin dikirim? \n ")
 
-#untuk membuka file dan melihat alamat email yang telah terkirim
-f = open("receiver_list.txt", "a")
-f.write(mailto)
-f.write("\n")
-f.close()
+        #menulis subject dan body yang akan menjadi pesan 
+        sub = input("subject?\n")
+        body = input("message? \n ")
+        msg = f'subject: {sub}\n\n{body}'                     #menggunakan f string agar penulisannya  berformat
 
-mailServer.quit()
+        #mengirimkan email
+        mailServer.sendmail(gmailaddress, mailto , msg)
+        print("Pesan sedang dikirim...\n")
+        print(" \n pesan berhasil dikirim!\n")
+
+        #untuk membuka file dan melihat alamat email yang telah terkirim
+        f = open("receiver_list.txt", "a")
+        f.write(mailto)
+        f.write("\n")
+        f.close()
+
+        mailServer.quit()
+
+
+    elif pilihan == 2:
+        break
+    else:
+        print("Silahkan input no yang benar")
+        print("++++++++++++++++++++++++++++")
+        continue
+  
 
 #sumber
 #https://youtu.be/JRCJ6RtE3xU
